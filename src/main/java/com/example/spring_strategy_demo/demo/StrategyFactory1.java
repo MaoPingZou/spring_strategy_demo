@@ -1,4 +1,4 @@
-package com.example.spring_strategy_demo.strategy_demo_1;
+package com.example.spring_strategy_demo.demo;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,32 +8,29 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * 策略工厂类
+ * 策略工厂类：使用 @Autowired 注入所有实现了策略接口的策略实现类
  *
  * @author MaoPing Zou
  */
 @Component
-public class StrategyFactory {
+public class StrategyFactory1 {
     /**
      * key为策略实现类组件名称，value为对应策略实现类
      */
-//    private final Map<String, IStrategy> strategyMap = new ConcurrentHashMap<>();
-//
-//    /**
-//     * 注入所有实现了IStrategy接口的Bean
-//     *
-//     * @param strategyMap
-//     */
-//    @Autowired
-//    public void setStrategyContextMap(Map<String, IStrategy> strategyMap) {
-//        // 清除Map中的所有映射
-//        this.strategyMap.clear();
-//        // 往策略Map中set容器中
-//        this.strategyMap.putAll(strategyMap);
-//    }
+    private final Map<String, IStrategy> strategyMap = new ConcurrentHashMap<>();
 
+    /**
+     * 使用 @Autowired 注入所有实现了IStrategy接口的Bean
+     *
+     * @param strategyMap 所有实现了 IStrategy 的策略实现类组成的Map
+     */
     @Autowired
-    private Map<String, IStrategy> map;
+    public void setStrategyContextMap(Map<String, IStrategy> strategyMap) {
+        // 清除Map
+        this.strategyMap.clear();
+        // 往策略Map中set容器中
+        this.strategyMap.putAll(strategyMap);
+    }
 
     /**
      * 根据组件名称获取对应策略实现类
@@ -42,11 +39,10 @@ public class StrategyFactory {
      * @return 策略实现类
      */
     public IStrategy getStrategy(String componentName) {
-        IStrategy iStrategy = map.get(componentName);
+        IStrategy iStrategy = strategyMap.get(componentName);
         if (iStrategy == null) {
-            throw new RuntimeException("no strategy defined!");
+            throw new RuntimeException("No strategy defined!");
         }
         return iStrategy;
     }
-
 }

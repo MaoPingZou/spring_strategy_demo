@@ -1,4 +1,4 @@
-package com.example.spring_strategy_demo.strategy_demo_1;
+package com.example.spring_strategy_demo.demo;
 
 import org.springframework.stereotype.Component;
 
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
  *
  * @author MaoPing Zou
  */
-@Component("策略A1")
+@Component("策略A")
 public class StrategyA implements IStrategy {
     @Override
     public void strategyMethod() {

@@ -1,4 +1,4 @@
-package com.example.spring_strategy_demo.strategy_demo_1;
+package com.example.spring_strategy_demo.demo;
 
 /**
  * 策略接口
